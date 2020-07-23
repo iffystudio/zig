@@ -1,0 +1,51 @@
+{
+  "books": [
+    {
+% foreach $bookH ( @{ $bookAH } ) {
+      "id": <% $bookH->{ id } %>,
+      "name": "<% $bookH->{ c_name } %>",
+      "sections": [
+        {
+%  foreach $sectionH ( @{ $sectionAH } ) {
+          "id": <% $sectionH->{ id } %>,
+          "name": "<% $sectionH->{ c_name } %>",
+          "games": [
+            {
+%   foreach $gameH ( @{ $gameAH } ) {
+%    if ( ( $gameH->{ c_idx } < 11 ) && ( $gameH->{ c_section_id } == $sectionH->{ id } ) ) {
+              "id": <% $gameH->{ id } %>,
+              "size": <% $gameH->{ c_size } %>,
+              "grid": [ <% join ', ', ( split ' ', $gameH->{ c_grid } ) %> ],
+              "max_path": [ <% join ', ', ( split ' ', $gameH->{ c_path_max } ) %> ],
+              "max_value": <% $gameH->{ c_val_max } %>,
+              "min_path": [ <% join ', ', ( split ' ', $gameH->{ c_path_min } ) %> ],
+              "min_value": <% $gameH->{ c_val_min } %>
+%     unless ( $gameH->{ c_idx } == 10 ) {
+            }, {
+%     }
+%    }
+%   }
+            }
+          ]
+%   unless ( $sectionH->{ id } == 650245901 ) {
+        }, {
+%   }
+%  }
+        }
+      ]
+    }
+  ]
+% }
+}
+<%init>
+  my ( $bookAH, $bookH, $sectionAH, $sectionH, $gameAH, $gameH, $itemHH );
+
+use Data::Dumper;
+  $itemHH = Hoo::Item::GetAll();
+
+  $bookAH = Hoo::Item::GetAllOfType( Zig::ITEM_TYPE_BOOK );
+
+  $sectionAH = Hoo::Item::GetAllOfType( Zig::ITEM_TYPE_SECTION );
+
+  $gameAH = Hoo::Item::GetAllOfType( Zig::ITEM_TYPE_GAME );
+</%init>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- produced by Iffy Studio -->
+<html lang="en">
+  <head>
+    <link href="/css/?566361" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta content="Choose any corner. Zig and zag to the opposite corner. Get the highest and lowest scores. That’s it." property="og:description">
+    <meta content="https://zig.iffy.studio/img/facebook.png" property="og:image">
+    <meta content="Zig – Solve It" property="og:title">
+    <meta content="https://zig.iffy.studio<% $ENV{ REQUEST_URI } %>" property="og:url">
+% if ( $robots ) {
+    <meta content="<% $robots %>" name="robots">
+% }
+% if ( ! $local ) {
+    <script>
+      ( function ( i, s, o, g, r, a, m ) { i[ 'GoogleAnalyticsObject' ] = r; i[ r ] = i[ r ] || function () { ( i[ r ].q = i[ r ].q || [ ] ).push( arguments ) }, i[ r ].l = 1 * new Date(); a = s.createElement( o ), m = s.getElementsByTagName( o )[ 0 ]; a.async = 1; a.src = g; m.parentNode.insertBefore( a, m ) } )( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+
+      ga( 'create', 'UA-77115616-1', 'auto' );
+      ga( 'send', 'pageview' );
+    </script>
+% }
+    <title><% ( $title ? ( $title . ' – ' ) : '' ) . ( ( $ENV{ HTTP_HOST } =~ /^z/ ) ? 'Zig' : 'Big Trouble' ) %></title>
+  </head>
+  <body<% $class ? ( ' class="' . $class . '"' ) : '' %><% $id ? ( ' id="' . $id . '"' ) : '' %>>
+    <div<% $all_class ? ( ' class="' . $all_class . '"' ) : '' %> id="all">
+% if ( $ads ) {
+      <div id="ad-left"><ins class="adsbygoogle" data-ad-client="ca-pub-3996306368918292" data-ad-slot="8714513534"></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+% }
+      <ul<% $tab ? ( ' class="' . $tab . '"' ) : '' %> id="tabs">\
+% foreach $tabH ( @Zig::TABS ) {
+<li<% ( ( $id eq $tabH->{ tab } ) || ( $tab eq $tabH->{ tab } ) ) ? ' id="front"' : '' %>><a href="<% $tabH->{ url } || $game_url %>"><% $tabH->{ label } %></a></li>\
+% }
+</ul>
+      <div id="tab">
+        <div id="top">\
+<%args>
+  $ads => undef
+  $all_class => undef
+  $class => undef
+  $game_url => undef
+  $id => undef
+  $robots => undef
+  $tab => undef
+  $title => undef
+</%args>
+<%init>
+  my ( %cookie, $tabH );
+
+  $ads = $ads && ( ! $local );
+
+  unless ( $game_url ) {
+    %cookie = CGI::Simple::Cookie->fetch( $r );
+
+    if ( ( exists $cookie{ a } ) && ( $cookie{ a }->value() =~ /s(\d+)/ ) && ( $cookie{ a }->value() =~ /c$1(\d+)/ ) ) {
+      $game_url = "/$1/";
+      }
+    else {
+      $game_url = '/' . $Zig::GAMES[ 0 ] . '/';
+      }
+    }
+</%init>

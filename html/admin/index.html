@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+% if ( $refresh ) {
+    <meta http-equiv="refresh" content="0;url=/admin/?size=<% $size %>&refresh=<% $refresh %>">
+% }
+    <style>
+      body { font-family: monospace; }
+    </style>
+    <title><% $title %> – Admin</title>
+  </head>
+  <body>
+    <h1><% $size %>×<% $size %> Grid</h1>
+    <h2>( <% join ', ', @sequence %> )</h2>
+% if ( $error ) {
+    <div><% $error %></div>
+% } else {
+    <h3>Top Left, Maximum</h3>
+    <div>[ <% join ' ', @$path_max_tl %> ] (<strong><% $val_max_tl %></strong>)</div>
+    <h3>Top Left, Minimum</h3>
+    <div>[ <% join ' ', @$path_min_tl %> ] (<strong><% $val_min_tl %></strong>)</div>
+    <h3>Top Right, Maximum</h3>
+    <div>[ <% join ' ', @$path_max_tr %> ] (<strong><% $val_max_tr %></strong>)</div>
+    <h3>Top Right, Minimum</h3>
+    <div>[ <% join ' ', @$path_min_tr %> ] (<strong><% $val_min_tr %></strong>)</div>
+% }
+  </body>
+</html>
+<%args>
+  $db       => 1
+  $refresh  => 0
+  $size     => 3
+</%args>
+<%init>
+  my ( $error, @grid, $gridS, $i, $id, $itemH, $j, @sequence,
+       $path_max_tl, $val_max_tl, $greedy_max_tl, $unique_max_tl, $path_min_tl, $val_min_tl, $greedy_min_tl, $unique_min_tl,
+       $path_max_tr, $val_max_tr, $greedy_max_tr, $unique_max_tr, $path_min_tr, $val_min_tr, $greedy_min_tr, $unique_min_tr,
+       $greedy_max_bl, $greedy_min_bl,
+       $greedy_max_br, $greedy_min_br,
+       $path_max, $path_min, $val_max, $val_min );
+
+
+  die 'ERROR: size must be greater than two.' unless $size > 2;
+
+  die 'ERROR: size must be less than 11.' unless $size < 15;
+
+
+  @sequence = List::Util::shuffle 1 .. ( $size ** 2 );
+
+  for ( $i = 0; $i < $size; $i++ ) {
+    push @grid, Data::Alias::alias[ @sequence[ ( $i * $size ) .. ( $i * $size + $size - 1 ) ] ];
+    }
+
+
+  # top left
+
+  ( $path_max_tl, $val_max_tl, $greedy_max_tl, $unique_max_tl, $path_min_tl, $val_min_tl, $greedy_min_tl, $unique_min_tl ) = Zig::top_left( \@grid, $size );
+
+
+  # top right
+
+  ( $path_max_tr, $val_max_tr, $greedy_max_tr, $unique_max_tr, $path_min_tr, $val_min_tr, $greedy_min_tr, $unique_min_tr ) = Zig::top_right( \@grid, $size );
+
+
+  # bottom left
+
+  ( $greedy_max_bl, $greedy_min_bl ) = Zig::bottom_left( \@grid, $size, $val_max_tr, $val_min_tr );
+
+
+  # bottom right
+
+  ( $greedy_max_br, $greedy_min_br ) = Zig::bottom_right( \@grid, $size, $val_max_tl, $val_min_tl );
+
+
+  # errata
+
+  if ( $val_max_tl > $val_max_tr ) {
+    if ( $unique_max_tl ) {
+      if ( ( $size < 4 ) || ( ( ! $greedy_max_tl ) && ( ! $greedy_max_br ) ) ) {
+        $path_max = $path_max_tl;
+        $val_max = $val_max_tl;
+        }
+      else {
+        $error = "Maximum path (top left) is a greedy path.";
+        }
+      }
+    else {
+      $error = "Multiple maximum paths: top left.";
+      }
+    }
+  elsif ( $val_max_tr > $val_max_tl ) {
+    if ( $unique_max_tr ) {
+      if ( ( $size < 4 ) || ( ( ! $greedy_max_tr ) && ( ! $greedy_max_bl ) ) ) {
+        $path_max = $path_max_tr;
+        $val_max = $val_max_tr;
+        }
+      else {
+        $error = "Maximum path (top right) is a greedy path.";
+        }
+      }
+    else {
+      $error = "Multiple maximum paths: top right.";
+      }
+    }
+  else {
+    $error = "Multiple maximum paths: top left, top right.";
+    }
+
+
+  if ( ! $error ) {
+    if ( $val_min_tl < $val_min_tr ) {
+      if ( $unique_min_tl ) {
+        if ( ( $size < 4 ) || ( ( ! $greedy_min_tl ) && ( ! $greedy_min_br ) ) ) {
+          $path_min = $path_min_tl;
+          $val_min = $val_min_tl;
+          }
+        else {
+          $error = "Minimum path (top left) is a greedy path.";
+          }
+        }
+      else {
+        $error = "Multiple minimum paths: top left.";
+        }
+      }
+    elsif ( $val_min_tr < $val_min_tl ) {
+      if ( $unique_min_tr ) {
+        if ( ( $size < 4 ) || ( ( ! $greedy_min_tr ) && ( ! $greedy_min_bl ) ) ) {
+          $path_min = $path_min_tr;
+          $val_min = $val_min_tr;
+          }
+        else {
+          $error = "Minimum path (top right) is a greedy path.";
+          }
+        }
+      else {
+        $error = "Multiple minimum paths: top right.";
+        }
+      }
+    else {
+      $error = "Multiple minimum paths: top left, top right.";
+      }
+    }
+
+
+  if ( $db && ( ! $error ) ) {
+    $gridS = ( join ' ', @sequence );
+
+    if ( Hoo::DB::SelectH( \'SELECT * FROM t_item WHERE c_grid = ?', [ $gridS ] ) ) {
+      $error = "$gridS already exists.";
+      }
+    else {
+      $itemH = {
+        item_type_id  => Zig::ITEM_TYPE_GAME,
+        c_created     => Hoo::Util::Now(),
+        c_size        => $size,
+        c_grid        => $gridS,
+        c_path_max    => ( join ' ', @$path_max ),
+        c_val_max     => $val_max,
+        c_path_min    => ( join ' ', @$path_min ),
+        c_val_min     => $val_min
+        };
+
+      $id = Hoo::Item::AdminAdd( $itemH );
+
+      Hoo::Item::AdminUpdate( $id, { c_name => $id } );
+      }
+    }
+</%init>

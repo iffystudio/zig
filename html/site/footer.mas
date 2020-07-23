@@ -1,0 +1,60 @@
+      </div>
+      <div id="copyright"><a href="https://iffy.studio/">© 2020 Iffy Studio</a></div>
+% if ( $ads ) {
+      <div id="ad-right"><ins class="adsbygoogle" data-ad-client="ca-pub-3996306368918292" data-ad-format="auto" data-ad-slot="4316496737"></div>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+% }
+% if ( $page eq 'play' ) {
+    <div class="help left">
+      <h2>Rules</h2>
+      <p>Move your mouse over any corner.&nbsp; It&nbsp;will highlight.&nbsp; From that point, move towards the diagonally opposite corner.</p>
+      <p>As you move, your path gets highlighted, and the sum of&nbsp;the highlighted cells is displayed.</p>
+      <p>You're only allowed to move in a direction that takes you closer to the opposite corner.&nbsp; Diagonal moves are not allowed.</p>
+      <p>There are two goals per board: get to&nbsp;the opposite corner with the lowest and highest possible scores.</p>
+      <p>Both these scores are displayed.&nbsp; For&nbsp;this board, the lowest is <% $min %> and the highest is <% $max %>.</p>
+      <p>Once you obtain both scores, you can advance to the next board.</p>
+      <p>That’s it.</p>
+    </div>
+    <div class="help right">
+      <h2>Options</h2>
+      <ul>
+        <li data-value="numbers"><span>n</span> Numbers<span> ✓</span></li>
+        <li data-value="shading"><span>s</span> Shading<span> ✓</span></li>
+        <li data-value="both"><span>b</span> Both<span> ✓</span></li>
+      </ul>
+      <ul><li id="cycle"><span>c</span> Cycle Display</li></ul>
+      <ul><li data-value="hide"><span>h</span> Hide Path<span> ✓</span></li></ul>
+      <ul><li data-value="valid"><span>v</span> Valid Moves<span> ✓</span></li></ul>
+      <h2>Errata</h2>
+      <p>You can use <span>1</span>, <span>2</span>, <span>3</span>, and <span>4</span> to choose the four corners, the arrow keys to draw (and erase) the path, and <span>r</span> to reset the board.</p>
+      <p>Please enjoy Zig responsibly.</p>
+      <span id="close"><span>space</span> Close</span>
+    </div>
+% }
+    </div>
+% if ( $data ) {
+    <script>
+      var _data = <% $data %>;
+    </script>
+% }
+% if ( $local ) {
+    <script src="/js/jquery-2.0.3.min.js"></script>
+% } else {
+    <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+% }
+    <script src="/js/?546681361"></script>
+% if ( $ads ) {
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+% }
+  </body>
+</html>\
+<%args>
+  $ads => undef
+  $data => undef
+  $max => undef
+  $min => undef
+  $page => undef
+</%args>
+<%init>
+  $ads = $ads && ( ! $local );
+</%init>

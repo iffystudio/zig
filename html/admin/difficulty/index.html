@@ -1,0 +1,59 @@
+<%init>
+  my ( $gameAH, $gameH, $graphH, @grid, $i, @path_max, @path_min, @sequence, $size );
+
+# $gameAH = Hoo::DB::SelectAH( \'SELECT * FROM t_item LIMIT 1' );
+  $gameAH = Hoo::DB::SelectAH( \'SELECT * FROM t_item WHERE c_size = 7 ORDER BY RAND() LIMIT 500' );
+# $gameAH = Hoo::DB::SelectAH( \'SELECT * FROM t_item WHERE id = 678980156 ORDER BY RAND() LIMIT 5' );
+
+  use Data::Dumper;
+
+  foreach $gameH ( @{ $gameAH } ) {
+    @grid = ( );
+
+    if ( $gameH->{ c_path_max } =~ /^1 / ) {
+      $size = $gameH->{ c_size };
+
+      @sequence = split ' ', $gameH->{ c_grid };
+
+      for ( $i = 0; $i < $size; $i++ ) {
+        push @grid, Data::Alias::alias[ @sequence[ ( $i * $size ) .. ( $i * $size + $size - 1 ) ] ];
+        }
+
+      $graphH = Zig::graph_top_left( \@grid, $size );
+
+      @path_max = split ' ', $gameH->{ c_path_max };
+      
+
+  my ( $idx_init );
+  my ( $idx, $idx_max, $idx_min, $idx_next, $key, $val, $val_max, $val_min, $val_path );
+
+  $idx_init = 1;
+
+  $idx_max = $idx_min = $idx_init;
+  $val_max = $val_min = 0;
+print $gameH->{ id };
+print " ";
+
+  foreach $i ( 0 .. @path_max - 2 ) {
+    $val_path = $sequence[ $path_max[ $i + 1 ] - 1 ];
+
+#print $val_path;
+#print "* ";
+    foreach $key ( keys %{ $graphH->{ $path_max[ $i ] } } ) {
+      $val = $graphH->{ $path_max[ $i ] }{ $key };
+#print $val;
+#print "- ";
+
+      if ( $val > $val_path ) {
+        $val_max++;
+        }
+      }
+    }
+
+print $val_max;
+print " ----- ";
+
+
+      }
+    }
+</%init>

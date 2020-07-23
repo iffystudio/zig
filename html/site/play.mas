@@ -1,0 +1,45 @@
+<& /site/header.mas, game_url => $itemH->{ c_url }, id => 'p', robots => 'noindex', title => 'Play', %ARGS &>
+          <h1>Play</h1>
+          <span id="solved">✓</span>
+          <span id="site"><% $title %></span>
+          <table class="s-<% $size %>">
+% for ( $i = 0; $i < @grid; $i++ ) {
+%  $i_plus_one = $i + 1;
+%  unless ( $i % $size ) {
+            <tr>\
+%  }
+<td class="\
+%  if ( $itemH->{ c_path_min } =~ /(^| )$i_plus_one($| )/ ) {
+min \
+%  } 
+%  if ( $itemH->{ c_path_max } =~ /(^| )$i_plus_one($| )/ ) {
+max\
+%  }
+" data-i="<% $i %>" style="opacity: <% $grid[ $i ] / $size_squared * 0.85 + 0.15 %>;"><% $grid[ $i ] %></td>\
+%  unless ( ( $i + 1 ) % $size ) {
+</tr>
+%  }
+% }
+          </table>
+          <span id="min"><span>Low</span><span><% $itemH->{ c_val_min } %></span></span>
+          <span id="max"><span>High</span><span><% $itemH->{ c_val_max } %></span></span>
+        </div>
+        <div id="bottom">
+          <span id="game"><span>Game</span><span><% $size %>-<% $itemH->{ c_idx } %></span></span>
+          <span id="current"><span>Current</span><span>0</span></span>
+          <a id="next">Next</a>
+        </div>
+<& /site/footer.mas, data => $data, min => $itemH->{ c_val_min }, max => $itemH->{ c_val_max }, page => 'play', %ARGS &>\
+<%args>
+  $itemH
+</%args>
+<%init>
+  my ( $data, @grid, $i, $i_plus_one, $size, $size_squared );
+
+  $size = $itemH->{ c_size };
+  $size_squared = $size * $size;
+
+  @grid = split ' ', $itemH->{ c_grid };
+
+  $data = "{ 'id': $itemH->{ id }, 'idx': $itemH->{ c_idx }, 'next': $itemH->{ c_id_next }, 'size': $size }";
+</%init>

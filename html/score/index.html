@@ -1,0 +1,13 @@
+<& /site/header.mas, id => 's', title => 'Score', %ARGS &>
+          <h1>Score</h1>
+          <span id="site"><% $title %></span>
+          <table class="s-11">
+            <tr><th>Level</th><th>Games</th><th>Solved</th><th>Rating</th></tr>
+          </table>
+        </div>
+<& /site/footer.mas, %ARGS &>\
+<%init>
+  my ( $size );
+
+  $size = ( $ENV{ HTTP_COOKIE } =~ /s(\d+)/ )[ 0 ];
+</%init>

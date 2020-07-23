@@ -1,0 +1,19 @@
+<& /site/header.mas, id => 'g', title => 'Games', %ARGS &>
+          <h1>Games</h1>
+          <div id="site"><% $title %></div>
+          <table class="s-10">
+            <tr>\
+% foreach $i ( 3 .. 12 ) {
+<td data-id="<% $gameA[ $i - 3 ] || $Zig::GAMES[ $i - 3 ] %>"><% $i %></td>\
+% }
+</tr>
+          </table>
+          <p>Choose a difficulty level, then click <a href="">Play</a>.</p>
+          <p>Or, jump to game <span>3</span>-<input id="jump" value="">&nbsp;<span id="go">Go</span></p>
+        </div>
+<& /site/footer.mas &>\
+<%init>
+  my ( @gameA, $i );
+
+  @gameA = $ENV{ HTTP_COOKIE } =~ /c3(\d+)c4(\d+)c5(\d+)c6(\d+)c7(\d+)c8(\d+)c9(\d+)c10(\d+)c11(\d+)c12(\d+)/;
+</%init>

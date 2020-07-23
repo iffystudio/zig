@@ -1,0 +1,11 @@
+<%args>
+  $itemH
+</%args>
+<%init>
+  if ( $itemH->{ item_type_id } == Zig::ITEM_TYPE_GAME ) {
+    $m->comp( '/site/play.mas', %ARGS );
+    }
+  else {
+    die 'Unknown item type: ' . $itemH->{ item_type_id };
+    }
+</%init>

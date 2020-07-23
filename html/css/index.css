@@ -1,0 +1,217 @@
+body, form, h1, h2, li, p, table, ul { line-height: 1; margin: 0; padding: 0; -webkit-user-select: none; }
+td, th { padding: 0; }
+
+a, a:visited { color: #000; cursor: pointer; text-decoration: none; }
+a:hover { color: #ff5c00; }
+body { font-size: 14px; }
+body, input { font-family: 'Lucida Grande', sans-serif; font-weight: bold; text-transform: uppercase; }
+html { background: #000 url( /img/background.jpg ) no-repeat left top fixed; background-size: cover; -moz-background-size: cover; -o-background-size: cover; -webkit-background-size: cover; }
+h1 { font-size: 32px; margin: 0 0 16px; }
+h2 { font-size: 20px; margin: -3px 0 16px; }
+table { border-collapse: separate; border-spacing: 0; left: 97px; line-height: 0; position: absolute; top: 97px; width: 400px; }
+td, th { background: #ffbc00; color: #fff; vertical-align: middle; }
+td { box-sizing: border-box; letter-spacing: -1px; padding-right: 1px; text-align: center; }
+
+table.s-10 td { font-size: 16px; height: 40px; min-width: 40px; }
+
+table.s-11 td, table.s-11 th { font-size: 13px; height: 36px; min-width: 36px; }
+table.s-11 tr:first-child td, table.s-11 tr:nth-child( 3n ) td { height: 37px; }
+
+table tr:first-child td:first-child, table tr:first-child th:first-child { border-top-left-radius: 8px; }
+table tr:first-child td:last-child, table tr:first-child th:last-child { border-top-right-radius: 8px; }
+table tr:last-child td:first-child { border-bottom-left-radius: 8px; }
+table tr:last-child td:last-child { border-bottom-right-radius: 8px; }
+
+td.p { background: #ccc; }
+
+input, p, #top li { font-size: 20px; line-height: 1.2; margin-bottom: 8px; }
+
+#all { background: #fff; border-radius: 8px; box-shadow: 0 0 15px 0px rgba( 205, 205, 205, 0.95 ); left: 50%; margin-left: -297px; margin-top: -320px; opacity: 0.89; position: absolute; top: 48%; width: 594px; }
+
+#bottom { bottom: 16px; left: 16px; position: absolute; right: 16px; }
+#bottom li, #bottom ul { display: inline; }
+#bottom li { border-left: 1px solid #666; margin-left: 12px; padding-left: 12px; }
+#bottom li:first-child { border: 0; margin-left: 0; padding-left: 0; }
+#bottom ul:last-child { float: right; }
+#bottom #download { bottom: 0; margin: 0; position: absolute; right: 0; }
+
+#copyright { font-size: 14px; left: 50%; margin-left: -100px; padding-top: 14px; position: absolute; text-align: center; width: 200px; }
+#copyright a { color: #fff; }
+#copyright a:hover { color: #000; }
+
+#download { background: url( /img/download.svg ); color: rgba( 0, 0, 0, 0 ); display: inline-block; height: 40px; margin: 8px 0; width: 135px; }
+
+#icon { height: 300px; width: 300px; background-size: 300px 300px; background-image: url( /img/icon.png ); float: right; }
+
+#site { color: #ff5c00; font-size: 32px; position: absolute; right: 16px; top: 16px; }
+
+#tab { border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; height: 562px; padding: 16px; position: relative; vertical-align: top; }
+
+#tabs { height: 43px; list-style-type: none; }
+#tabs li { border: 3px solid #ddd; border-right-width: 0; border-top-width: 0; box-sizing: border-box; display: inline-block; height: 43px; position: relative; top: 0; width: 119px; }
+#tabs li:first-child { border-left-width: 0; }
+#tabs li:last-child { width: 118px; }
+#tabs li a { background: none; box-shadow: inset 0 -5px 5px 0 #e3e9f4; display: block; height: 100%; line-height: 41px; text-align: center; }
+#tabs li:first-child, #tabs li:first-child a { border-top-left-radius: 8px; }
+#tabs li:last-child, #tabs li:last-child a { border-top-right-radius: 8px; }
+#tabs #front { border-bottom-width: 0; }
+#tabs #front a { box-shadow: none; color: #ff5c00; }
+
+#top { margin: -16px -16px 0; padding: 16px 16px 10px; }
+#top ul + p { margin-top: 12px; }
+
+
+% # /
+
+#i p span { position: relative; }
+
+#i p:nth-of-type( 1 ) { font-size: 36px; margin-top: 4px; }
+#i p:nth-of-type( 2 ) { font-size: 56px; margin-top: 20px; }
+#i p:nth-of-type( 3 ) { font-size: 26px; margin-top: 25px; }
+#i p:nth-of-type( 4 ) { font-size: 105px; margin-top: 13px; }
+
+
+% # /app/
+
+#a p { font-size: 50px; }
+
+#a #bottom > a:last-child { float: right; }
+#a #top li { margin-bottom: 3px; }
+#a #top ul { margin: 0 0 8px 24px; }
+
+#aaa #app { width: 224px; }
+#aaa #app div:nth-child( 3 ) { background: url( /img/app.png ); height: 353px; width: 224px; }
+#aaa #app span { left: 96px; top: 17px; }
+#aaa #app span:first-child { left: 76px; }
+#aaa #app span:last-child { left: 74px; top: 411px; }
+
+
+% # /games/
+
+#g td { border-radius: 43%; cursor: pointer; }
+#g td.p { background: #ff5c00; }
+
+#g p:nth-of-type( 1 ) { margin-top: 148px; }
+#g p:nth-of-type( 1 ) > a { color: #ff5c00; }
+#g p:nth-of-type( 2 ) { margin-top: 24px; }
+#g p:nth-of-type( 2 ) > span { margin: 0 2px; visibility: hidden; }
+
+#g #go.valid { color: #ff5c00; cursor: pointer; visibility: visible; }
+
+#g #jump { background: #eee; border: 0; border-radius: 8px; box-sizing: border-box; height: 34px; margin: 0 4px; outline: none; padding: 6px; width: 54px; -webkit-appearance: none; -webkit-highlight: none; }
+
+
+% # /play/
+
+#p table.s-3 td { font-size: 60px; height: 133px; min-width: 133px; }
+#p table.s-3 tr:last-child td { height: 134px; }
+
+#p table.s-4 td { font-size: 42px; height: 100px; min-width: 100px; }
+
+#p table.s-5 td { font-size: 33px; height: 80px; min-width: 80px; }
+
+#p table.s-6 td { font-size: 27px; height: 66px; min-width: 66px; }
+#p table.s-6 tr:nth-child( 3n ) td { height: 67px; }
+
+#p table.s-7 td { font-size: 23px; height: 57px; min-width: 57px; }
+#p table.s-7 tr:nth-child( 4n ) td { height: 58px; }
+
+#p table.s-8 td { font-size: 20px; height: 50px; min-width: 50px; }
+
+#p table.s-9 td { font-size: 18px; height: 44px; min-width: 44px; }
+#p table.s-9 tr:nth-child( 2n ) td { height: 45px; }
+
+#p table.s-12 td { font-size: 12px; height: 33px; min-width: 33px; }
+
+#p td { border-radius: 43%; }
+
+#p td.a { background: #ff5c00 !important; }
+#p td.s { background: #ff5c00; }
+#p td.p, #p td.v { cursor: pointer; }
+
+#p.hide td.p { background: #ffbc00; }
+#p.numbers td { opacity: 1 !important; }
+#p.shading td { font-size: 0 !important; }
+#p.valid td.v { background: #ff5c00; }
+
+#p #current, #p #game, #p #max, #p #min, #p #next { font-size: 23px; line-height: 1.3; }
+#p #current, #p #game, #p #max, #p #min, #p #next, #p #solved { position: absolute; }
+#p #current, #p #game, #p #next { bottom: -3px; }
+#p #current, #p #solved { display: none; text-align: center; width: 100px; }
+#p #current span.solved, #p #max span.solved, #p #min span.solved, #p.solved #max span:last-child, #p.solved #min span:last-child, #p.solved #solved { color: #ff5c00; }
+#p #current span:first-child, #p #game span:first-child, #p #max span:first-child, #p #min span:first-child, #p #next span:first-child { display: block; font-size: 14px; position: relative; }
+#p #max, #p #min { top: 264px; width: 80px; }
+
+#p #max span.solved, #p #min span.solved, #p.solved #max span:last-child, #p.solved #min span:last-child { cursor: pointer; }
+
+#p #current { left: 231px; }
+#p #game { left: 2px; }
+#p #max { right: 18px; text-align: right; }
+#p #min { left: 18px; }
+#p #next, #p #next:hover { color: #bbb; cursor: default; right: 2px; text-align: right; }
+#p #solved { font-size: 32px; left: 250px; top: 16px; }
+
+#p.solved #next { color: #ff5c00; cursor: pointer; }
+#p.solved #next.done { color: #000; cursor: default; }
+
+#p div.help { background: #fff; border-radius: 8px; box-sizing: border-box; color: #666; display: none; height: 594px; padding: 16px; position: absolute; top: 43px; width: 300px; }
+#p div.help h2 { font-size: 16px; margin: 2px 0 16px; }
+#p div.help h2:nth-of-type( 2 ) { margin-top: 38px; }
+#p div.help p { font-size: 14px; font-weight: normal; line-height: 1.4; text-transform: none; width: 95%; }
+
+#p div.help.left { border-top-right-radius: 0; left: -303px; }
+#p div.help.right { border-top-left-radius: 0; right: -303px; }
+
+#p div.help #close { bottom: 16px; cursor: pointer; left: 16px; position: absolute; }
+
+#p div.help li { cursor: pointer; line-height: 1.4; margin-bottom: 4px; }
+#p div.help ul { font-weight: normal; list-style-type: none; margin-bottom: 16px; text-transform: none; }
+
+#p div.help li > span, #p div.help p span, #p #close > span { bottom: 1px; font-family: monospace; font-weight: bold; position: relative; text-transform: uppercase; }
+#p div.help li > span:first-child::after, #p div.help p span:after, #p #close > span::after { content: ']'; position: relative; bottom: 1px; }
+#p div.help li > span:first-child::before, #p div.help p span:before, #p #close > span::before { content: '['; position: relative; bottom: 1px; }
+
+#p div.help li > span:nth-of-type( 2 ) { display: none; }
+
+
+% # /score/
+
+#s th:first-child { width: 22%; }
+#s th:last-child { width: 28%; }
+#s th { width: 25%; }
+
+#s td span { background: url( /img/rating.png ); display: inline-block; height: 15px; position: relative; top: 1px; width: 0; }
+#s td span.r-1 { width: 16px; }
+#s td span.r-2 { right: 1px; width: 24px; }
+#s td span.r-3 { width: 32px; }
+#s td span.r-4 { right: 1px; width: 40px; }
+#s td span.r-5 { width: 48px; }
+#s td span.r-6 { right: 1px; width: 56px; }
+#s td span.r-7 { width: 64px; }
+#s td span.r-8 { right: 1px; width: 72px; }
+#s td span.r-9 { width: 80px; }
+
+
+% # app widget
+
+#app { background: #fff; border: 1px solid #999; border-radius: 10px; padding: 43px 0 41px; position: absolute; right: 15px; top: 15px; width: 150px; }
+#app div:nth-child( 3 ) { background: #fff; border-bottom: 1px solid #999; border-top: 1px solid #999; color: #444; height: 236px; line-height: 230px; text-align: center; width: 150px; }
+#app span { height: 8px; border: 1px solid #999; border-radius: 5px; left: 60px; position: absolute; top: 17px; width: 30px; }
+#app span:first-child { left: 40px; width: 8px; }
+#app span:last-child { background: url( /img/rating.png ); border: 0; height: 15px; left: 37px; top: 293px; visibility: hidden; width: 76px; }
+
+
+% # google adsense
+
+#ad-left, #ad-right { height: 600px; position: absolute; top: 40px; }
+#ad-left { left: -174px; width: 160px; }
+#ad-right { right: -314px; width: 300px; }
+ins.adsbygoogle { display: block; height: 100%; width: 100%; }
+
+
+% # retina images
+
+@media ( -webkit-device-pixel-ratio: 2 ), ( min-resolution: 192dpi ) {
+  #icon { background-image: url( /img/icon@2x.png ); }
+  #s td span { background-image: url( /img/rating@2x.png ); background-size: 80px 15px; }
+  }

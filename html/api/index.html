@@ -1,0 +1,10 @@
+<% $itemH->{ id } %>\
+<%args>
+  $idx
+  $size
+</%args>
+<%init>
+  my ( $itemH );
+
+  $itemH = Hoo::DB::SelectH( \'SELECT id FROM t_item WHERE c_size = ? AND c_idx = ?', [ $size, $idx ] );
+</%init>

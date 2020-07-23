@@ -1,0 +1,17 @@
+<%init>
+  Hoo::SetMasonRequestObject( $m );
+  Hoo::DB::Connect( { mysql_enable_utf8 => 1 } );
+
+  $ENV{ HTTP_HOST } =~ /^(\w+)/;
+
+  $domain = $1;
+
+  $local = ( $ENV{ HTTP_HOST } =~ /^$domain$/ );
+
+  $title = ( $domain eq 'zig' ) ? 'Zig' : 'Big Trouble';
+
+  Hoo::HandleURL( { %ARGS } );
+</%init>
+<%cleanup>
+  Hoo::DB::Disconnect();
+</%cleanup>

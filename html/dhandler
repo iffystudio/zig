@@ -1,0 +1,3 @@
+<%init>
+  # do not delete; not ever called but its existence is what causes the autohandler to be called for all virtual URLs
+</%init>
